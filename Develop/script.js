@@ -24,7 +24,7 @@ var user_selection = {
         break;
     }
   }
-}
+};
 
 var criteria = [
   "Please define password length (min=8,max=128)",
@@ -33,17 +33,54 @@ var criteria = [
   "Should numeric characters be used? (0 = no, 1 = yes)",
   "Should special characters be used? (0 = no, 1 = yes)",
 
-]
+];
 //function used to loop through fill out user criteria
 // loop iterates through object keys to fill out user response.
 function setCriteria() {
   for(let i = 0; i < Object.keys(user_selection).length-1; i++)
     {
       response = prompt(criteria[i]);
+      let type = null;
+      if(i === 0)
+      {
+      type = 'length';
+      } else{
+        type = 'yes/no';
+      }
+      while(!valid_entry(type,response))
+      {
+        response = prompt(criteria[i]);
+      }
       user_selection.set_parameters(i,response);
     }
-}
+};
 
+function valid_entry(type,entry)
+{
+  let isNumber = parseInt(entry);
+  if(Number.isNaN(isNumber))
+  {
+    isNumber = null;
+  }
+  
+    if(type === 'length')
+    {
+      if(isNumber === null || isNumber < 8 || isNumber > 128)
+      {
+        alert("That is not a valid answer! Please try again...");
+        return false;
+      }
+    }
+    else if (type === 'yes/no')
+    {
+      if(isNumber === null || isNumber < 0 || isNumber > 1)
+      {
+        alert("That is not a valid answer! Please try again...");
+        return false;
+      }
+    }
+    return true;
+};
 
 function generatePassword() {
   var lowercase = 'abcdefghijklmnopqrstuvwxyz';
@@ -76,7 +113,7 @@ function generatePassword() {
        }
     }
     return generated;
-}
+};
 
 // Get references to the #generate element
 var generateBtn = document.querySelector("#generate");
@@ -88,7 +125,7 @@ function writePassword() {
 
   passwordText.value = password;
 
-}
+};
 
 // Add event listener to generate button
 generateBtn.addEventListener("click", writePassword);
