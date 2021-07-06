@@ -15,10 +15,10 @@ Update existing code to make the generate password button do the following:
    ### Checks
         - []Upon incorrect entry program will re-request response until criteria is accepted
 
-Please see link below for Password Generator accesible URL:<br/>
+Please see link below for Password Generator accessible URL:<br/>
         https://darkjuanjo.github.io/random_password_generator/
         
-**Below is the source code for the password generator in github. Please note that code in<span style="color:red">assets/js</span>.<br />**
+**Below is the source code for the password generator in GitHub. Please note that code in <span style="color:red">assets/js</span>.<br />**
         https://github.com/darkjuanjo/random_password_generator
 
 ## See below for some screenshots
