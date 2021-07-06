@@ -26,6 +26,11 @@ var user_selection = {
   }
 };
 
+var sum_validation = function() {
+  return user_selection.has_lower + user_selection.has_upper + user_selection.has_numeric 
+          + user_selection.has_special
+}
+
 var criteria = [
   "Please define password length (min=8,max=128)",
   "Should lowercase characters be used? (0 = no, 1 = yes)",
@@ -36,8 +41,9 @@ var criteria = [
 ];
 //function used to loop through fill out user criteria
 // loop iterates through object keys to fill out user response.
-function setCriteria() {
-  for(let i = 0; i < Object.keys(user_selection).length-1; i++)
+function setCriteria(initial) {
+  
+  for(let i = initial; i < Object.keys(user_selection).length-1; i++)
     {
       response = prompt(criteria[i]);
       let type = null;
@@ -52,6 +58,12 @@ function setCriteria() {
         response = prompt(criteria[i]);
       }
       user_selection.set_parameters(i,response);
+    }
+    
+    if(sum_validation() == 0)
+    {
+      alert("Error: Password must have at least one criteria selected.");
+      setCriteria(1);
     }
 };
 
@@ -87,7 +99,7 @@ function generatePassword() {
   var uppercase = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
   var numeric = '0123456789';
   var special = '!"\'@#$%^&*()_+~/*-+?<>,.;=[]/\\`|{} '; 
-  setCriteria();
+  setCriteria(0);
   //var content = [lowercase,uppercase,numeric,special]; 
 
     let generated = "";
